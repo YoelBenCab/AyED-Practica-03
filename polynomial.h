@@ -91,7 +91,11 @@ double Polynomial::Eval(const double x) const {
 // Comparación si son iguales dos polinomios representados por vectores densos
 bool Polynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
-  // poner el código aquí
+  for (int i = 0; i < get_size(); ++i) {
+    if (at(i) != pol.at(i)) {
+      return differents;
+    }
+  }
   return !differents;
 }
 
@@ -135,7 +139,11 @@ double SparsePolynomial::Eval(const double x) const {
 bool SparsePolynomial::IsEqual(const SparsePolynomial& spol
 			       , const double eps) const {
   bool differents = false;
-  // poner el código aquí
+  for (int i = 0; i < get_nz(); ++i) {
+    if (at(i).get_val() != spol.at(i).get_val()) {
+      return differents;
+    }
+  }
   return !differents;
 }
 
@@ -143,7 +151,15 @@ bool SparsePolynomial::IsEqual(const SparsePolynomial& spol
 // vector disperso y vector denso
 bool SparsePolynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
-  // poner el código aquí
+  SparsePolynomial spol(pol);
+  if (get_nz() != spol.get_nz()) { // si tienen diferente tamaño devuelve falso
+    return differents;
+  }
+  for (int i = 0; i < get_nz(); ++i) { // si tienen mismo tamaño comprueba los valores de sus indices
+    if (at(i).get_val() != spol.at(i).get_val()) { 
+      return differents;
+    }
+  } 
   return !differents;
 }
 
