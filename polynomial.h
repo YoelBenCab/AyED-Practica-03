@@ -125,7 +125,9 @@ std::ostream& operator<<(std::ostream& os, const SparsePolynomial& p) {
 // Evaluación de un polinomio representado por vector disperso
 double SparsePolynomial::Eval(const double x) const {
   double result{0.0};
-  // poner el código aquí
+  for (int i = 0; i < get_nz(); ++i) {
+    result = result + at(i).get_val() * pow(x, at(i).get_inx()); 
+  }
   return result;
 }
 
