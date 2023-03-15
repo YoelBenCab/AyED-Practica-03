@@ -91,6 +91,9 @@ double Polynomial::Eval(const double x) const {
 // Comparación si son iguales dos polinomios representados por vectores densos
 bool Polynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
+  if (get_size() != pol.get_size()) {
+    return differents;
+  }
   for (int i = 0; i < get_size(); ++i) {
     if (at(i) != pol.at(i)) {
       return differents;
@@ -139,6 +142,9 @@ double SparsePolynomial::Eval(const double x) const {
 bool SparsePolynomial::IsEqual(const SparsePolynomial& spol
 			       , const double eps) const {
   bool differents = false;
+  if (get_nz() != spol.get_nz()) {
+    return differents;
+  }
   for (int i = 0; i < get_nz(); ++i) {
     if (at(i).get_val() != spol.at(i).get_val()) {
       return differents;
